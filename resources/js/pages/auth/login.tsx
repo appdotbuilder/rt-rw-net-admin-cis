@@ -1,3 +1,4 @@
+import React from 'react';
 import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
@@ -19,6 +20,7 @@ type LoginForm = {
 interface LoginProps {
     status?: string;
     canResetPassword: boolean;
+    [key: string]: unknown;
 }
 
 export default function Login({ status, canResetPassword }: LoginProps) {
