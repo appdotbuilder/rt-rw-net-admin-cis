@@ -17,8 +17,12 @@ Route::get('/', function () {
     return Inertia::render('welcome');
 })->name('home');
 
+// Redirect dashboard to main dashboard route for consistency
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
     // Client Management
     Route::resource('clients', ClientController::class);

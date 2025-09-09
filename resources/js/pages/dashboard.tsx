@@ -30,28 +30,28 @@ interface DashboardProps {
         phone: string;
         status: string;
         created_at: string;
-        internet_package: {
+        internet_package?: {
             name: string;
             price: number;
-        };
+        } | null;
     }>;
     openTickets: Array<{
         id: number;
         title: string;
         priority: string;
         created_at: string;
-        client: {
+        client?: {
             name: string;
-        };
+        } | null;
     }>;
     recentNotifications: Array<{
         id: number;
         title: string;
         type: string;
         created_at: string;
-        client: {
+        client?: {
             name: string;
-        };
+        } | null;
     }>;
     monthlyRevenue: Array<{
         month: string;
@@ -241,7 +241,7 @@ export default function Dashboard({
                                         <div>
                                             <p className="font-medium">{client.name}</p>
                                             <p className="text-sm text-muted-foreground">
-                                                {client.internet_package.name} - {client.phone}
+                                                {client.internet_package?.name || 'No Package'} - {client.phone}
                                             </p>
                                         </div>
                                         <Badge variant={getStatusBadgeVariant(client.status)}>
@@ -271,7 +271,7 @@ export default function Dashboard({
                                         <div>
                                             <p className="font-medium">{ticket.title}</p>
                                             <p className="text-sm text-muted-foreground">
-                                                {ticket.client.name}
+                                                {ticket.client?.name || 'Unknown Client'}
                                             </p>
                                         </div>
                                         <Badge variant={getPriorityBadgeVariant(ticket.priority)}>
@@ -303,7 +303,7 @@ export default function Dashboard({
                                         <div>
                                             <p className="font-medium">{notification.title}</p>
                                             <p className="text-sm text-muted-foreground">
-                                                {notification.client.name}
+                                                {notification.client?.name || 'System Notification'}
                                             </p>
                                         </div>
                                         <Badge variant="outline">
